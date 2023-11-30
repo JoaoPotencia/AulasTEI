@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         textPeso= findViewById(R.id.textPeso);
         btnSalvar = findViewById(R.id.btnSalvar);
 
+
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,10 +40,21 @@ public class MainActivity extends AppCompatActivity {
                         "Salvo os dados",
                         Toast.LENGTH_LONG
                 ).show();
-                calcularIMC();
+//               calcularIMC();
+                salvarNoBanco();
             }
         });
     }
+
+    public void salvarNoBanco(){
+        bd.execSQL("INSERT INTO DadosUsuario(nome,imc) VALUES (nome, imc)");
+        Toast.makeText(
+                getApplicationContext(),
+                "Salvo no Banco",
+                Toast.LENGTH_LONG
+        ).show();
+    }
+
 
     private String calcularIMC() {
         double peso = Double.parseDouble(textPeso.getText().toString());
